@@ -2,6 +2,10 @@
   "name": "mean_chat",
   "version": "1.0.0",
   "description": "Simple chat app using MEAN stack and Socket.io.",
+  "engines": {
+	"node": "4.4.7",
+	"npm": "3.5.3"
+  }
   "main": "server.js",
   "scripts": {
     "test": "start",
