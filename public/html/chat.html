@@ -1,0 +1,48 @@
+<h1 class="text-center" id="chatHeader">NodeChat</h1>
+
+<div class="row">
+	<div class="col-xs-4">
+		<div>
+			<h3>Online Users</h3>
+			<div class="list-group" id="online">
+				<div ng-repeat="u in users track by $index">
+					<div id="onlineUser">
+						{{u}}
+						<button class="roomJoin btn btn-success" ng-click="privateChat(u)">PRIVATE CHAT</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form action="/users/logout" method="get">
+			<button class="uiButton btn btn-default" ng-click="logout()">Logout</button>
+		</form>
+	</div>
+	<div class="col-xs-8">
+		<h3 class="text-right">Messages</h3>
+		<div id="chat" scroll-glue>
+			<div ng-repeat="m in messages | orderBy:'time' track by $index">
+				<div class="row messageRow">
+					<div class="col-xs-2" ng-hide="m.user==chat.username">
+						<img class="userIcon img-responsive" 
+							src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png">
+						<br> <h5 class="text-center sender"><strong>{{m.user}}</strong></h5> 
+					</div>
+					<div class="col-xs-10">
+						<div class="message" ng-class="{curUser: m.user==chat.username}">
+							[ {{m.time}} ]: <br><br>{{m.message}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<form id="messageForm" ng-submit="send(message)">
+			<div class="form-group">
+				<label>Enter Message</label>
+				<textarea class="form-control" ng-model="chat.message" id="messageInput"></textarea>
+				<br>
+				<input type="submit" class="uiButton btn btn-primary" value="Send Message"/>
+			</div>
+		</form>
+	</div>
+</div>

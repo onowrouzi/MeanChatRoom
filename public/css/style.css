@@ -1,0 +1,148 @@
+body {
+	background-color: #444;
+}
+
+#main {
+	background-color: white;
+	box-shadow: 0 0 30px black;
+	padding: 5vh;
+	width: 90%;
+	margin: -30px 5% 0 5%;
+	min-height: 100vh;
+}
+
+.uiButton {
+	width: 100%;
+}
+
+#chatHeader {
+	font-size: 60px;
+	font-family: Impact;
+	font-weight: 700;
+	margin: 0;
+}
+
+#online {
+	width: 100%;
+	height: 600px;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+#onlineUser {
+	padding: 10px;
+	height: 50px;
+	font-weight: 700;
+	font-size: 20px;
+	border: 1px solid #AAA;
+}
+
+.roomJoin {
+	float: right;
+	margin-top: -3px;
+	width: 14vw;
+	font-size: 1vw;
+}
+
+#chat {
+	width: 100%;
+	height: 500px;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.messageRow {
+	margin-bottom: 20px;
+}
+
+.userIcon {
+	margin-left: 3%;
+}
+
+.sender {
+	margin-top: -20px;
+}
+
+.message {
+	margin-left: -3%;
+	padding: 10px;
+	border: 1px solid #212121;
+	border-radius: 10px;
+	max-width: 50%;
+	height: auto;
+	box-shadow: 5px 5px 10px #888;
+	margin-right: 50%;
+	word-wrap: break-word;
+	position: relative;
+	background: #FFF;
+	border: 1px solid #000;
+}
+
+.message:after, .message:before {
+	right: 100%;
+	top: 25%;
+	border: solid transparent;
+	content: " ";
+	position: absolute;
+	pointer-events: none;
+}
+
+.message:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #FFF;
+	border-width: 10px;
+	margin-top: -10px;
+}
+
+.message:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: #000;
+	border-width: 11px;
+	margin-top: -11px;
+}
+
+.curUser {
+	margin-left: 68%;
+	width: 100%;
+	box-shadow: -5px 5px 10px #888;
+	position: relative;
+	background: #CCE;
+	border: 1px solid #000;
+}
+
+.curUser:after, .curUser:before {
+	left: 100%;
+	top: 75%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.curUser:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-left-color: #CCE;
+	border-width: 10px;
+	margin-top: -10px;
+}
+.curUser:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-left-color: #000;
+	border-width: 11px;
+	margin-top: -11px;
+}
+
+#messageInput {
+	height: 50px;
+}
+
+#messageForm {
+	width: 100%;
+	min-height: 100px;
+	max-height: 200px;
+}
