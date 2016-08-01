@@ -1,6 +1,6 @@
 module.exports = function(io, mongo) {
 	
-	mongo.connect('mongodb://127.0.0.1/chat', function(err, db){
+	mongo.connect('mongodb://onowrouzi:therighs1@ds139645.mlab.com:39645/heroku_80bclfr8', function(err, db){
 		
 		if(err) throw err;
 		
