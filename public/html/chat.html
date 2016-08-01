@@ -23,8 +23,8 @@
 			<div ng-repeat="m in messages | orderBy:'time' track by $index">
 				<div class="row messageRow">
 					<div class="col-xs-2" ng-hide="m.user==chat.username">
-						<img class="userIcon img-responsive" 
-							src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png">
+						<img class="userIcon img-responsive img-circle" 
+							ng-src="{{m.avatar}}">
 						<br> <h5 class="text-center sender"><strong>{{m.user}}</strong></h5> 
 					</div>
 					<div class="col-xs-10">

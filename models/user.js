@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb://heroku_80bclfr8:6vr8eh5phpqp4kjh83chn47raq@ds139645.mlab.com:39645/heroku_80bclfr8',function(){
+mongoose.connect('mongodb://localhost/chat',function(){
 	console.log('Chat user database has been connected!')
 });
 
@@ -11,6 +11,9 @@ var UserSchema = mongoose.Schema({
 		index: true
 	},
 	password: {
+		type: String
+	},
+	avatar: {
 		type: String
 	}
 });

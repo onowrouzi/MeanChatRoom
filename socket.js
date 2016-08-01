@@ -1,6 +1,6 @@
 module.exports = function(io, mongo) {
 	
-	mongo.connect('mongodb://heroku_80bclfr8:6vr8eh5phpqp4kjh83chn47raq@ds139645.mlab.com:39645/heroku_80bclfr8', function(err, db){
+	mongo.connect('mongodb://127.0.0.1/chat', function(err, db){
 		
 		if(err) throw err;
 		
@@ -28,8 +28,9 @@ module.exports = function(io, mongo) {
 			});
 			
 			socket.on('send message', function(data){
-				messages.insert({user: data.username, message: data.message, time: data.time}, function(){
-					console.log("Inserted message: " + data.username + " -> " + data.message + " at " + data.time)
+				messages.insert({user: data.username, message: data.message, time: data.time, avatar: data.avatar}, function(){
+					console.log("Inserted message: " + data.username + " -> " + data.message + " at " + data.time);
+					console.log("Avatar: " + data.avatar);
 				});
 			});
 			

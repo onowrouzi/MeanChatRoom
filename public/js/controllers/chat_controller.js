@@ -8,6 +8,7 @@
 			$scope.messages = []; //Message list.
 			$scope.chat = {}; //Chat object for sending full JSON data set for user.
 			$scope.chat.username = $cookieStore.get('username'); //Retrieve current user name from cookies.
+			$scope.chat.avatar = $cookieStore.get('avatar'); //Retrieve user avatar to portray to other users.
 			
 			//Add current user name to online list on server.
 			socket.emit('enter user', $scope.chat.username);
