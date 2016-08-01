@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "start",
-	"start": "node server.js"
+	"start": "node server.js",
+	"web": "node server.js"
   },
   "author": "onowrouzi",
   "license": "ISC",
