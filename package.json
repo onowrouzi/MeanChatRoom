@@ -1,10 +1,11 @@
 {
-  "name": "node_chat",
+  "name": "mean_chat",
   "version": "1.0.0",
-  "description": "Test app for chat using Node JS.",
+  "description": "Simple chat app using MEAN stack and Socket.io.",
   "main": "server.js",
   "scripts": {
-    "test": "start"
+    "test": "start",
+	"start": "node server.js"
   },
   "author": "onowrouzi",
   "license": "ISC",
