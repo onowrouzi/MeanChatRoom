@@ -17,10 +17,10 @@
             </span>
             <input class="form-control" ng-model="user.password" type="password" placeholder="Password..." name="password" required>
         </div><br>
-        <button ng-click="login(user)"class="btn btn-success" style="width: 100%" type="submit">Login</button>
+        <button ng-click="login(user)" id="loginBtn" class="btn uiButton" type="submit">Login</button>
     </form>
 	<br>
-    <a ui-sref="register" class="btn btn-primary" style="width: 100%">Register</a>
+    <a ui-sref="register" class="btn uiButton">Register</a>
     <p ng-show="error" class="error">
         Invalid user name or password... Try again.
     </p>

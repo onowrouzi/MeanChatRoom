@@ -18,8 +18,10 @@ h1 {
 
 #login, #register {
 	background-color: rgba(255,255,255,0.7);
-	padding: 20px 20px 60px 20px;
+	padding: 20px 60px 60px 60px;
 	border-radius: 10px;
+	margin-top: 10%;
+	box-shadow: 0 20px 50px black;
 }
 
 #headerIcon {
@@ -27,11 +29,44 @@ h1 {
 	height: 50px;
 }
 
+.btn:focus {
+	outline: 0;
+}
+
 .uiButton {
+	font-family:arial, helvetica, sans-serif; 
 	width: 100%;
-	background-color: #212121;
+	border: 1px solid black;
+	background-image: -webkit-linear-gradient(top, #777777, #212121);
+	background-image: -moz-linear-gradient(top, #777777, #212121);
+	background-image: -ms-linear-gradient(top, #777777, #212121);
+	background-image: -o-linear-gradient(top, #777777, #212121);
+	background-image: linear-gradient(to bottom, #777777, #212121);
 	color: white;
 	font-weight: 600;
+	text-shadow: -1px 0 0 #000,
+				 0 -1px 0 #000,
+				 -1px 0 0 #000,
+				 0 1px 0 #000; 
+}
+
+#loginBtn {
+	color: black;
+	text-shadow: none;
+	background-image: -webkit-linear-gradient(top, #DDD, #888);
+	background-image: -moz-linear-gradient(top, #DDD, #888);
+	background-image: -ms-linear-gradient(top, #DDD, #888);
+	background-image: -o-linear-gradient(top, #DDD, #888);
+	background-image: linear-gradient(to bottom, #DDD, #888);
+}
+
+.uiButton:hover, #loginBtn:hover {
+	 background-image: -webkit-linear-gradient(top, #212121, #111);
+	 background-image: -moz-linear-gradient(top, #212121, #111);
+	 background-image: -ms-linear-gradient(top, #212121, #111);
+	 background-image: -o-linear-gradient(top, #212121, #111);
+	 background-image: linear-gradient(to bottom, #212121, #111);
+	 color:white;
 }
 
 #chatHeader {
@@ -75,7 +110,7 @@ h3, label {
 
 #chat {
 	width: 100%;
-	height: 500px;
+	height: 505px;
 	border: 1px solid #CCC;
 	border-radius: 5px;
 	overflow-y: auto;
