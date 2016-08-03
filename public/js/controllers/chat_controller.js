@@ -36,6 +36,11 @@
 				for (var i = 0; i < data.length; i++){
 					$scope.users.push({username: data[i], request: false});
 				}
+				for (var i = 0; i < $scope.users.length; i++){
+					if (data.indexOf($scope.users[i].username) == -1){
+						$scope.users.splice(i, 1);
+					}
+				}
 				$cookieStore.put('users', $scope.users);
 				$scope.$apply();
 			});
