@@ -10,7 +10,7 @@
 						{{u}}
 						<button ng-hide="chat.isPrivate || privateNotif" class="roomJoin btn btn-success" ng-click="setPrivate(u)">PRIVATE CHAT</button>
 						<button ng-show="chat.receiver==u && chat.isPrivate" class="roomJoin btn btn-danger" ng-click="setPublic()">LEAVE PRIVATE</button>
-						<button ng-show="privateNotif" class="roomJoin btn btn-primary" ng-click="setPrivate(privateUser)">CHAT REQUEST</button>
+						<button ng-show="privateNotif && privateUser==u" class="roomJoin btn btn-primary" ng-click="setPrivate(privateUser)">CHAT REQUEST</button>
 					</div>
 				</div>
 			</div>
