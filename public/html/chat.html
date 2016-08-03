@@ -6,11 +6,11 @@
 			<h3>Online Users</h3>
 			<div class="list-group" id="online">
 				<div ng-repeat="u in users track by $index">
-					<div ng-if="u != chat.username" id="onlineUser">
-						{{u}}
-						<button ng-hide="chat.isPrivate || privateUser==u" class="roomJoin btn btn-success" ng-click="setPrivate(u)">PRIVATE CHAT</button>
-						<button ng-show="chat.receiver==u && chat.isPrivate" class="roomJoin btn btn-danger" ng-click="setPublic()">LEAVE PRIVATE</button>
-						<button ng-show="privateNotif && privateUser==u" class="roomJoin btn btn-primary" ng-click="setPrivate(privateUser)">CHAT REQUEST</button>
+					<div ng-if="u.username != chat.username" id="onlineUser">
+						{{u.username}}
+						<button ng-hide="u.request || u.username == chat.receiver " class="roomJoin btn btn-success" ng-click="setPrivate(u)">PRIVATE CHAT</button>
+						<button ng-show="chat.receiver==u.username && chat.isPrivate" class="roomJoin btn btn-danger" ng-click="setPublic()">LEAVE PRIVATE</button>
+						<button ng-show="u.request && u.username != chat.receiver" class="roomJoin btn btn-primary" ng-click="setPrivate(u)">NEW MESSAGE</button>
 					</div>
 				</div>
 			</div>

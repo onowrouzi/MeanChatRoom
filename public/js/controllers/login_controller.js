@@ -13,7 +13,7 @@
 						$cookieStore.put('isPrivate', false);
 						$cookieStore.put('recipients', 'All');
 						$cookieStore.put('receiver', '');
-						$cookieStore.put('privateUser', '');
+						$cookieStore.put('users', '');
 						if (data.avatar) {
 							$cookieStore.put('avatar', data.avatar);
 						} else {
