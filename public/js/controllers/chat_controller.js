@@ -56,6 +56,9 @@
 			socket.on('remove user', function(data){
 				var index = findUser(data);
 				$scope.users.splice(index, 1);
+				if (data == $scope.chat.receiver){
+					$scope.setPublic();
+				}
 			});
 			//-------------------END OF USER LIST POPULATION------------------//
 			
