@@ -156,12 +156,6 @@
 			
 			//Log out current user.
 			$scope.logout = function(){
-				var time = new Date();
-				time = moment.utc(time);
-				$scope.chat.time = time.format("MM/DD/YYYY HH:mm");
-				$scope.chat.message = $scope.chat.username + " has logged out...";
-				socket.emit('send message', $scope.chat);
-				if ($scope.users.indexOf($scope.chat.receiver) != -1) socket.emit('send private message', $scope.chat);
 				$cookieStore.put('auth', false);
 				socket.emit('log out', {user: $scope.chat.username});
 				socket.emit('disconnect');
