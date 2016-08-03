@@ -70,10 +70,13 @@
 			//Receive new message.
 			socket.on('new message', function(data){
 				if (data.isPrivate == $scope.chat.isPrivate){
-					$scope.messages.push(data);
-					unseen++;
-					$rootScope.title = 'MEANchat (' + unseen + ')';
-					$scope.$apply();
+					if (!data.isPrivate || data.username == $scope.chat.username ||
+							data.receiver == $scope.chat.username) { 
+						$scope.messages.push(data);
+						unseen++;
+						$rootScope.title = 'MEANchat (' + unseen + ')';
+						$scope.$apply();
+					}
 				} 
 			});
 			//---------------------END OF MESSAGE POPULATION------------------//
