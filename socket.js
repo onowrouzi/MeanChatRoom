@@ -87,7 +87,7 @@ module.exports = function(io, mongo) {
 			socket.on('log out', function(data){
 				console.log(data.user + ' logged out.');
 				currentUsers.splice(currentUsers.indexOf(data.user),1);
-				io.emit('get users', currentUsers);
+				io.emit('remove user', data.user);
 			});	
 			
 			socket.on('disconnect', function(data){

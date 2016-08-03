@@ -52,6 +52,11 @@
 					$cookieStore.put('users', $scope.users);
 				}
 			});
+			//Remove user on log out.
+			socket.on('remove user', function(data){
+				var index = findUser(data);
+				$scope.users.splice(index, 1);
+			});
 			//-------------------END OF USER LIST POPULATION------------------//
 			
 			
