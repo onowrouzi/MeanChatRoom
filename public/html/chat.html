@@ -6,9 +6,11 @@
 			<h3>Online Users</h3>
 			<div class="list-group" id="online">
 				<div ng-repeat="u in users track by $index">
-					<div id="onlineUser">
+					<div ng-if="u != chat.username" id="onlineUser">
 						{{u}}
-						<!--<button class="roomJoin btn btn-success" ng-click="privateChat(u)">PRIVATE CHAT</button>-->
+						<button ng-hide="chat.isPrivate || privateNotif" class="roomJoin btn btn-success" ng-click="setPrivate(u)">PRIVATE CHAT</button>
+						<button ng-show="chat.receiver==u && chat.isPrivate" class="roomJoin btn btn-danger" ng-click="setPublic()">LEAVE PRIVATE</button>
+						<button ng-show="privateNotif" class="roomJoin btn btn-primary" ng-click="setPrivate(privateUser)">CHAT REQUEST</button>
 					</div>
 				</div>
 			</div>
@@ -18,24 +20,25 @@
 		</form>
 	</div>
 	<div class="col-md-8 col-xs-12">
-		<h3 class="text-right">Messages</h3>
+		<h3 class="text-right">Recipients: {{recipients}}</h3>
 		<div id="chat" scroll-glue>
 			<div ng-repeat="m in messages | orderBy:'time' track by $index">
 				<div class="row messageRow">
-					<div class="col-xs-2" ng-hide="m.user==chat.username">
+					<div class="col-xs-2" ng-hide="m.username==chat.username">
 						<img class="userIcon img-responsive img-circle" 
 							ng-src="{{m.avatar}}">
-						<br> <h5 class="text-center sender"><strong>{{m.user}}</strong></h5> 
+						<br> <h5 class="text-center sender"><strong>{{m.username}}</strong></h5> 
 					</div>
 					<div class="col-xs-10">
-						<div class="message" ng-class="{curUser: m.user==chat.username}">
-							[ {{m.time}} ]: <br><br>{{m.message}}
+						<div class="message" ng-class="{curUser: m.username==chat.username}">
+							[{{m.time}} GMT]: <br><br>{{m.message}}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<br>
+		
 		<form id="messageForm" ng-submit="send(message)">
 			<div class="form-group">
 				<label>Enter Message</label>
@@ -44,8 +47,8 @@
 				<input type="submit" class="uiButton btn" value="Send Message"/>
 			</div>
 		</form>
-		<br><br>
 		<form class="visible-xs visible-sm" action="/users/logout" method="get">
+			<br>
 			<button class="uiButton btn" id="lightBtn" ng-click="logout()">Logout</button>
 		</form>
 	</div>

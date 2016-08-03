@@ -8,9 +8,12 @@
 			$scope.login = function(user) {
 				$http.post("/users/login", user)
 					.success(function(data, status){
-						console.log(data);
 						$cookieStore.put('auth', true);
 						$cookieStore.put('username', data.username);
+						$cookieStore.put('isPrivate', false);
+						$cookieStore.put('recipients', 'All');
+						$cookieStore.put('receiver', '');
+						$cookieStore.put('privateUser', '');
 						if (data.avatar) {
 							$cookieStore.put('avatar', data.avatar);
 						} else {
