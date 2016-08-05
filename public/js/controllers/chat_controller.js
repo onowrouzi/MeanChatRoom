@@ -56,8 +56,8 @@
 			});
 			//Remove user on log out.
 			socket.on('remove user', function(data){
-				var index = findUser(data);
 				$scope.$apply(function(){
+					var index = findUser(data);
 					$scope.users.splice(index, 1);
 					if (data == $scope.chat.receiver){
 						alert($scope.chat.receiver + " has logged out...");
