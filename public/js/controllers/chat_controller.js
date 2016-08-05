@@ -6,6 +6,7 @@
         .controller('chat_controller', function chat_controller($scope, $rootScope, socket, $log, $window, $cookieStore) {
 			
 			//------------------START OF INITIAL VARIABLE POPULATION------------------//
+			$scope.isCollapsed = $window.innerWidth < 768;
 			$scope.recipients = $cookieStore.get('recipients');  //Recipients in current chat.
 			var unseen = 0; //Variable for counting amount of unseen messages.
 			var prevMessages = 10000000; //Number of messages to compare with the number of received messages. 
@@ -154,6 +155,11 @@
 				}
 			};
 			
+			//Helper function for enter key in textarea.
+			$scope.getEnter = function(e){
+				if (e.which === 13) $scope.send();
+			};
+			
 			//Log out current user.
 			$scope.logout = function(){
 				$cookieStore.put('auth', false);
@@ -168,6 +174,16 @@
 				$rootScope.$apply();
 			};
 			
+			angular.element($window).bind('resize', function(){
+				if ($window.innerWidth < 768){
+					$scope.isCollapsed = true;
+				} else {
+					$scope.isCollapsed = false;
+				}
+				$scope.$apply();
+			});
+			
+			//Helper function for checking username existance in user list.
 			function findUser(user){
 				for (var i = 0; i < $scope.users.length; i++){
 					if ($scope.users[i].username == user){

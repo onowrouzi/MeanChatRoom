@@ -1,7 +1,8 @@
 <h1 class="text-center" id="chatHeader">MEANchat</h1>
 
 <div class="row">
-	<div class="col-md-4 visible-md visible-lg">
+	<button class="btn btn-primary visible-xs" id="onlineBtn" ng-click="isCollapsed = !isCollapsed">Online Users</button>
+	<div class="col-sm-4" uib-collapse="isCollapsed">
 		<div>
 			<h3>Online Users</h3>
 			<div class="list-group" id="online">
@@ -19,7 +20,7 @@
 			<button class="uiButton btn" ng-click="logout()">Logout</button>
 		</form>
 	</div>
-	<div class="col-md-8 col-xs-12">
+	<div class="col-sm-8 col-xs-12">
 		<h3 class="text-right">Recipients: {{recipients}}</h3>
 		<div id="chat" scroll-glue>
 			<div ng-repeat="m in messages | orderBy:'time' track by $index">
@@ -42,14 +43,14 @@
 		<form id="messageForm" ng-submit="send(message)">
 			<div class="form-group">
 				<label>Enter Message</label>
-				<textarea class="form-control" ng-model="chat.message" id="messageInput"></textarea>
+				<textarea class="form-control" ng-model="chat.message" ng-keyup="getEnter($event)" id="messageInput"></textarea>
 				<br>
-				<input type="submit" class="uiButton btn" value="Send Message"/>
+				<input type="submit" id="lightBtn" class="uiButton btn" value="Send Message"/>
 			</div>
 		</form>
 		<form class="visible-xs visible-sm" action="/users/logout" method="get">
 			<br>
-			<button class="uiButton btn" id="lightBtn" ng-click="logout()">Logout</button>
+			<button class="uiButton btn" ng-click="logout()">Logout</button>
 		</form>
 	</div>
 </div>
