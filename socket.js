@@ -1,9 +1,10 @@
 module.exports = function(io, mongo) {
 	
 	mongo.connect('mongodb://heroku_80bclfr8:6vr8eh5phpqp4kjh83chn47raq@ds139645.mlab.com:39645/heroku_80bclfr8', function(err, db){
-		
+	//mongo.connect('mongodb://127.0.0.1/chat', function(err, db){	
 		if(err) throw err;
 		
+		var q = require('q');
 		var currentUsers = [];
 		var connections = [];
 		
@@ -27,32 +28,15 @@ module.exports = function(io, mongo) {
 			
 			socket.on('get messages', function(data){ 
 				console.log("Getting messages for " + data.username);
-				messages.find().each(function(err, msg){
-					if (err) throw err;
-					if (msg != null) {
-						socket.emit('receive messages', msg);
-					}
+				getMessages().then(function(messages){
+					socket.emit('receive messages', messages);
 				});
 			});
 			
 			socket.on('get private messages', function(data){
 				console.log("Getting private messages for " + data.username);
-				privateMessages.find({
-					$or:[
-						{
-							'username': data.username,
-							'receiver': data.receiver
-						},
-						{
-							'username': data.receiver,
-							'receiver': data.username
-						}
-					]
-				}).each(function(err, msg){
-					if (err) throw err;
-					if (msg != null) {
-						socket.emit('receive private messages', msg);
-					}
+				getPrivateMessages(data).then(function(messages){
+					socket.emit('receive private messages', messages);
 				});
 			});
 			
@@ -81,6 +65,7 @@ module.exports = function(io, mongo) {
 					connections[currentUsers.indexOf(data.receiver)].emit('private notification', data.username);
 					console.log("Inserted private message: " + data.username + " to " + data.receiver + " -> " 
 								+ data.message + " at " + data.time);
+					console.log("Notifying " + data.receiver + " of private message from " + data.username);
 				});
 			});
 			
@@ -94,6 +79,35 @@ module.exports = function(io, mongo) {
 				connections.splice(connections.indexOf(socket), 1);
 				console.log('Disconnected: ' + connections.length + ' sockets connected');
 			});
+			
+			function getMessages(){
+				var deferred = q.defer();
+				messages.find().toArray(function(err, item){
+					if (err) deferred.reject(err);
+					else deferred.resolve(item);
+				});
+				return deferred.promise;
+			}
+			
+			function getPrivateMessages(data){
+				var deferred = q.defer();
+				privateMessages.find({
+					$or:[
+						{
+							'username': data.username,
+							'receiver': data.receiver
+						},
+						{
+							'username': data.receiver,
+							'receiver': data.username
+						}
+					]
+				}).toArray(function(err, item){
+					if (err) deferred.reject(err);
+					else deferred.resolve(item);
+				});
+				return deferred.promise;
+			}
 
 		});
 		

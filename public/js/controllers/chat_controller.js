@@ -26,38 +26,44 @@
 			//Add current user name to online list on server.
 			socket.emit('enter user', $scope.chat.username);
 			//Retrieve current users.
-			if ($cookieStore.get('users') == '') {
-				$scope.users = [];
-				socket.emit('check users', $scope.chat); 
-			} else {
-				$scope.users = $cookieStore.get('users');
+			function getUsers(){
+				if ($cookieStore.get('users') == '') {
+					$scope.users = [];
+					socket.emit('check users', $scope.chat); 
+				} else {
+					$scope.users = $cookieStore.get('users');
+				}
 			}
+			getUsers();
 			//Repopulate online list on client side.
 			socket.on('get users', function(data){
-				for (var i = 0; i < data.length; i++){
-					$scope.users.push({username: data[i], request: false});
-				}
-				$cookieStore.put('users', $scope.users);
-				$scope.$apply();
+				$scope.$apply(function(){
+					for (var i = 0; i < data.length; i++){
+						$scope.users.push({username: data[i], request: false});
+					}
+					$cookieStore.put('users', $scope.users);
+				});
 			});
 			//Add user on entrance.
 			socket.on('add user', function(data){
 				var exists = findUser(data);
 				if (exists == -1) {
-					$scope.users.push({username: data, request: false});
-					$cookieStore.put('users', $scope.users);
+					$scope.$apply(function(){
+						$scope.users.push({username: data, request: false});
+						$cookieStore.put('users', $scope.users);
+					});
 				}
-				$scope.$apply();
 			});
 			//Remove user on log out.
 			socket.on('remove user', function(data){
 				var index = findUser(data);
-				$scope.users.splice(index, 1);
-				if (data == $scope.chat.receiver){
-					alert($scope.chat.receiver + " has logged out...");
-					$scope.setPublic();
-				}
-				$scope.$apply();
+				$scope.$apply(function(){
+					$scope.users.splice(index, 1);
+					if (data == $scope.chat.receiver){
+						alert($scope.chat.receiver + " has logged out...");
+						$scope.setPublic();
+					}
+				});
 			});
 			//-------------------END OF USER LIST POPULATION------------------//
 			
@@ -75,15 +81,17 @@
 			//Receive new message list. [One at a time]
 			socket.on('receive messages', function(data){
 				if (!$scope.chat.isPrivate){
-					$scope.messages.push(data);
-					$scope.$apply();
+					$scope.$apply(function(){
+						$scope.messages = data;
+					});
 				} 
 			});
 			//Receive new private message list. [One at a time]
 			socket.on('receive private messages', function(data){
 				if ($scope.chat.isPrivate){
-					$scope.messages.push(data);
-					$scope.$apply();
+					$scope.$apply(function(){
+						$scope.messages = data;
+					});
 				} 
 			});
 			//Receive new message.
@@ -91,10 +99,11 @@
 				if (data.isPrivate == $scope.chat.isPrivate){
 					if (!data.isPrivate || (data.username == $scope.chat.username   && data.receiver == $scope.chat.receiver) 
 						|| (data.receiver == $scope.chat.username && data.username == $scope.chat.receiver)) { 
-						$scope.messages.push(data);
-						unseen++;
-						$rootScope.title = 'MEANchat (' + unseen + ')';
-						$scope.$apply();
+						$scope.$apply(function(){
+							$scope.messages.push(data);
+							unseen++;
+							if (unseen > 0) $rootScope.title = 'MEANchat (' + unseen + ')';
+						});
 					}
 				} 
 			});
@@ -103,12 +112,13 @@
 			
 			//Notify user of private message.
 			socket.on('private notification', function(data){
-				if (data != $scope.chat.receiver) {
+				$scope.$apply(function(){
+					console.log('Private Chat Request!');
 					var index = findUser(data);
 					if (index != -1) $scope.users[index].request = true;
 					$cookieStore.put('users', $scope.users);
 					$scope.$apply();
-				}
+				});
 			});
 			
 			//Initiate private chat.
@@ -167,22 +177,26 @@
 				$cookieStore.put('auth', false);
 				socket.emit('log out', {user: $scope.chat.username});
 				socket.emit('disconnect');
+				$window.location.reload();
 			};
 			
 			//Clear number of unseen messages for title.
 			$window.onfocus = function(){
-				unseen = 0;
-				$rootScope.title = 'MEANchat';
-				$rootScope.$apply();
+				$scope.$apply(function(){
+					unseen = 0;
+					$rootScope.title = 'MEANchat';
+				});
 			};
 			
+			//Detect if window is too narrow for user list.
 			angular.element($window).bind('resize', function(){
-				if ($window.innerWidth < 768){
-					$scope.isCollapsed = true;
-				} else {
-					$scope.isCollapsed = false;
-				}
-				$scope.$apply();
+				$scope.$apply(function(){
+					if ($window.innerWidth < 768){
+						$scope.isCollapsed = true;
+					} else {
+						$scope.isCollapsed = false;
+					}
+				});
 			});
 			
 			//Helper function for checking username existance in user list.
@@ -194,6 +208,5 @@
 				}
 				return -1;
 			}
-				
         });
 })();

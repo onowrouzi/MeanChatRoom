@@ -4,12 +4,12 @@ body {
 
 #main {
 	margin: 0;
-	width: 98vw;
 	min-height: 100vh;
 }
 
 h1 {
 	font-family: Impact;
+	font-size: 60px;
 }
 
 #login, #register {
@@ -18,11 +18,13 @@ h1 {
 	border-radius: 10px;
 	margin-top: 5%;
 	box-shadow: 0 20px 50px black;
+	height: 70vh;
 }
 
 #headerIcon {
-	width: 50px;
-	height: 50px;
+	width: 35%;
+	height: 17vh;
+	margin-left: 33%;
 }
 
 .btn:focus {
@@ -55,22 +57,22 @@ h1 {
 	color: white;
 }
 
-#onlineBtn {
-	margin: 50px 0 -50px 20px;
+#chatBody {
+	background-color: #DDD;
+	padding-bottom: 50px;
 }
 
 #chatHeader {
-	color: white;
-	font-size: 60px;
+	color: black;
 	margin: 0;
 	padding: 20px;
 	width: 32%;
-	margin: -40px 0 -40px 34%;
-	text-shadow: black 8px 8px 8px;
+	margin: 0 0 -40px 34%;
+	text-shadow: #999 8px 8px 15px;
 }
 
 h3, label {
-	color: white;
+	color: black;
 	font-family: "Arial Black", Impact, Arial;
 }
 
@@ -80,6 +82,7 @@ h3, label {
 	border: 1px solid #CCC;
 	overflow: auto;
 	background-color: rgba(255,255,255,0.85);
+	box-shadow: #222 2px 2px 8px;
 }
 
 #onlineUser {
@@ -104,6 +107,7 @@ h3, label {
 	overflow-y: auto;
 	overflow-x: hidden;
 	background-color: white;
+	box-shadow: #222 2px 2px 8px;
 }
 
 .messageRow {
@@ -161,7 +165,7 @@ h3, label {
 	width: 100%;
 	box-shadow: -5px 5px 10px #888;
 	position: relative;
-	background-color:rgb(150, 227, 255);
+	background-color: #5AF;
 	border: 1px solid #000;
 }
 
@@ -178,7 +182,7 @@ h3, label {
 
 .curUser:after {
 	border-color: rgba(255, 255, 255, 0);
-	border-left-color: rgb(150, 227, 255);
+	border-left-color: #5AF;
 	border-width: 10px;
 	margin-top: -10px;
 }
@@ -191,6 +195,7 @@ h3, label {
 
 #messageInput {
 	height: 50px;
+	box-shadow: #222 2px 2px 8px;
 }
 
 #messageForm {

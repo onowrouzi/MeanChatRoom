@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Simple chat app using MEAN stack and Socket.io.",
   "engines": {
-	"node": "4.4.7",
-	"npm": "3.5.3"
+    "node": "4.4.7",
+    "npm": "3.5.3"
   },
   "main": "server.js",
   "scripts": {
     "test": "start",
-	"start": "node server.js"
+    "start": "node server.js"
   },
   "author": "onowrouzi",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "mongoose": "^4.5.7",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "q": "^1.4.1",
     "socket.io": "^1.4.8"
   }
 }

@@ -13,13 +13,16 @@
                   templateUrl: "/html/login.html",
                   controller: "login_controller",
 				  resolve: {
-					  load: function($q, $cookieStore){
+					  load: function($q, $timeout, $state, $cookieStore){
 						  var deferred = $q.defer();
-						  if (!$cookieStore.get('auth')){
-							  deferred.resolve();
-						  } else {
-							  deferred.reject();
-						  }
+						  $timeout(function(){
+							  if (!$cookieStore.get('auth')){
+								  deferred.resolve();
+							  } else {
+								  $state.go('chat');
+								  deferred.reject();
+							  }
+						  });
 						  return deferred.promise;
 					  }
 				  } 
@@ -29,13 +32,16 @@
 				  templateUrl: "/html/chat.html",
 				  controller: "chat_controller",
 				  resolve: {
-					  load: function($q, $cookieStore){
+					  load: function($q, $timeout, $state, $cookieStore){
 						  var deferred = $q.defer();
-						  if ($cookieStore.get('auth')){
-							  deferred.resolve();
-						  } else {
-							  deferred.reject();
-						  }
+						  $timeout(function(){
+							  if ($cookieStore.get('auth')){
+								  deferred.resolve();
+							  } else {
+								  $state.go('login');
+								  deferred.reject();
+							  }
+						  });
 						  return deferred.promise;
 					  }
 				  }			
