@@ -47,6 +47,7 @@
 					$scope.users.push({username: data, request: false});
 					$cookieStore.put('users', $scope.users);
 				}
+				$scope.$apply();
 			});
 			//Remove user on log out.
 			socket.on('remove user', function(data){
@@ -56,6 +57,7 @@
 					alert($scope.chat.receiver + " has logged out...");
 					$scope.setPublic();
 				}
+				$scope.$apply();
 			});
 			//-------------------END OF USER LIST POPULATION------------------//
 			
