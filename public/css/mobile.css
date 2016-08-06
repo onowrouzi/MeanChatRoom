@@ -1,0 +1,72 @@
+body{
+	background-color: white;
+}
+
+#main{
+	margin: 0;
+}
+
+h1 {
+	font-size: 30px;
+	font-weight: 600;
+}
+
+h3, label {
+	font-size: 16px;
+}
+
+.btn {
+	height: 30px;
+}
+
+#login, #register {
+	margin: 0;
+	width: 120%;
+	margin-left: -10%;
+	box-shadow: none;
+}
+
+.glyphicon-lock, .glyphicon-user, .input-group > input{
+	font-size: 4vh !important;
+}
+
+.input-group, .input-group > input {
+	min-height: 8vh !important;
+}
+
+#headerIcon {
+	width: 30vw;
+	height: auto;
+	margin-left: 20vw;
+}
+
+.roomJoin {
+	font-size: 16px;
+}
+
+#chatBody {
+	background-color: white;
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+#chatHeader {
+	font-weight: 700;
+	margin-left: 
+}
+
+#messageInput {
+	height: 50px;
+	font-size: 12px;
+}
+
+.message {
+	font-size: 3vh;
+	max-width: 100%;
+	margin-right: 0;
+}
+
+.curUser {
+	margin-left: 20%;
+	max-width: 100%;
+}
