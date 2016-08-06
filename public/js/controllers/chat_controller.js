@@ -3,9 +3,10 @@
 
     angular
         .module('app')
-        .controller('chat_controller', function chat_controller($scope, $rootScope, socket, $log, $window, $cookieStore) {
+        .controller('chat_controller', function chat_controller($scope, $rootScope, socket, Idle, Keepalive, $log, $window, $cookieStore) {
 			
 			//------------------START OF INITIAL VARIABLE POPULATION------------------//
+			Idle.watch();
 			$scope.isCollapsed = $window.innerWidth < 768;
 			$scope.recipients = $cookieStore.get('recipients');  //Recipients in current chat.
 			var unseen = 0; //Variable for counting amount of unseen messages.
@@ -208,5 +209,10 @@
 				}
 				return -1;
 			}
+			
+			$scope.$on('IdleTimeout', function(){
+				alert('You have been idle too long. You will now be logged out.');
+				$scope.logout();
+			});
         });
 })();

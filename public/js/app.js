@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-angular.module('app', ['ui.router', 'ui.bootstrap', 'angularMoment', 'ngCookies', 'luegg.directives'])
-	//Window focus event and title initializer.
+angular.module('app', ['ui.router', 'ui.bootstrap', 'angularMoment', 'ngCookies', 'ngIdle', 'luegg.directives'])
+	//Window focus and idle event and title initializer.
 	.run(function($rootScope){
 		$rootScope.title = "MEANchat";
 		
@@ -10,6 +10,12 @@ angular.module('app', ['ui.router', 'ui.bootstrap', 'angularMoment', 'ngCookies'
 			$rootScope.blurred = false;
 		};
 	})
+	//Configure idle/timeout timers.
+	.config(['IdleProvider', 'KeepaliveProvider', function(IdleProvider, KeepaliveProvider){
+		IdleProvider.idle(10*60);
+		IdleProvider.timeout(20*60);
+		KeepaliveProvider.interval(10);
+	}])
 	//Inject socket factory for use in Angular.
 	.factory('socket', ['$rootScope', function($rootScope){
 		var socket = io.connect();
@@ -22,6 +28,6 @@ angular.module('app', ['ui.router', 'ui.bootstrap', 'angularMoment', 'ngCookies'
 				socket.emit(evt, data);
 			}
 		};
-	}])
+	}]);
 
 })();
