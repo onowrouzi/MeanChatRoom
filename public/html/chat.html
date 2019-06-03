@@ -1,73 +1,97 @@
 <div class="container-fluid" id="chatBody">
+  <button
+    class="btn btn-primary visible-xs pull-left"
+    ng-click="cc.isCollapsed = !cc.isCollapsed"
+  >
+    Online Users
+  </button>
 
-	<button class="btn btn-primary visible-xs pull-left" ng-click="isCollapsed = !isCollapsed">Online Users</button>
+  <h1 class="text-center" id="chatHeader">MEANchat</h1>
 
-	<h1 class="text-center" id="chatHeader">MEANchat</h1>
+  <div class="row">
+    <div class="col-sm-4" uib-collapse="cc.isCollapsed">
+      <div>
+        <h3>Online Users</h3>
+        <div class="list-group" id="online">
+          <div ng-repeat="u in cc.users track by $index">
+            <div ng-if="u.username != cc.chat.username" id="onlineUser">
+              {{ u.username }}
+              <button
+                ng-hide="u.request || u.username == cc.chat.receiver "
+                class="btn-online-user btn btn-success pull-right"
+                ng-click="cc.setPrivate(u)"
+              >
+                PRIVATE CHAT
+              </button>
+              <button
+                ng-show="cc.chat.receiver==u.username && cc.chat.isPrivate"
+                class="btn-online-user btn btn-danger pull-right"
+                ng-click="cc.setPublic()"
+              >
+                LEAVE PRIVATE
+              </button>
+              <button
+                ng-show="u.request && u.username != cc.chat.receiver"
+                class="btn-online-user btn btn-primary pull-right"
+                ng-click="cc.setPrivate(u)"
+              >
+                NEW MESSAGE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="hidden-xs" action="/users/logout" method="get">
+        <button
+          class="btn btn-default btn-logout form-control"
+          ng-click="cc.logout()"
+        >
+          Logout
+        </button>
+      </form>
+    </div>
+    <div class="col-sm-8 col-xs-12">
+      <h3 class="text-right">Recipients: {{ cc.recipients }}</h3>
+      <div id="chat" scroll-glue>
+        <div
+          class="row msg"
+          ng-repeat="m in cc.messages | orderBy:'timeMs' track by $index"
+        >
+          <div class="col-xs-1">
+            <img ng-src="{{ m.avatar }}" class="img-responsive" />
+          </div>
+          <div class="col-xs-11 chat-message">
+            <strong>{{ m.username }}</strong> &nbsp <em>[{{ m.time }}]</em> :
+            <br />
+            {{ m.message }} <br />
+          </div>
+        </div>
+      </div>
+      <br />
 
-	<div class="row">
-		<div class="col-sm-4" uib-collapse="isCollapsed">
-			<div>
-				<h3>Online Users</h3>
-				<div class="list-group" id="online">
-					<div ng-repeat="u in users track by $index">
-						<div ng-if="u.username != chat.username" id="onlineUser">
-							{{u.username}}
-							<button ng-hide="u.request || u.username == chat.receiver " class="roomJoin btn btn-success" ng-click="setPrivate(u)">PRIVATE CHAT</button>
-							<button ng-show="chat.receiver==u.username && chat.isPrivate" class="roomJoin btn btn-danger" ng-click="setPublic()">LEAVE PRIVATE</button>
-							<button ng-show="u.request && u.username != chat.receiver" class="roomJoin btn btn-primary" ng-click="setPrivate(u)">NEW MESSAGE</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<form class="hidden-xs" action="/users/logout" method="get">
-				<button class="uiButton btn" ng-click="logout()">Logout</button>
-			</form>
-		</div>
-		<div class="col-sm-8 col-xs-12">
-			<h3 class="text-right">Recipients: {{recipients}}</h3>
-			<div id="chat" scroll-glue>
-				<div class="row msg" ng-repeat="m in messages | orderBy:'time' track by $index">
-					<div class="col-xs-1">
-						<img ng-src="{{m.avatar}}" class="img-responsive">
-					</div>
-					<div class="col-xs-11" style="margin-left: -20px;">
-						<strong>{{m.username}}</strong> &nbsp <em>[{{m.time}}]</em> : <br>
-						{{m.message}} <br>
-					</div>
-				</div>
-			</div>
-				<!--<h3 class="text-right">Recipients: {{recipients}}</h3>
-			<div id="chat" scroll-glue>
-				<div ng-repeat="m in messages | orderBy:'time' track by $index">
-					<div class="row messageRow">
-						<div class="col-xs-2" ng-hide="m.username==chat.username">
-							<img class="userIcon img-responsive img-circle"
-								ng-src="{{m.avatar}}">
-							<br> <h5 class="text-center sender"><strong>{{m.username}}</strong></h5>
-						</div>
-						<div class="col-xs-10">
-							<div class="message" ng-class="{curUser: m.username==chat.username}">
-								[{{m.time}} GMT]: <br><br>{{m.message}}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>-->
-			<br>
-
-			<form id="messageForm" ng-submit="send(message)">
-				<div class="form-group">
-					<label>Enter Message</label>
-					<textarea class="form-control" ng-model="chat.message" ng-keyup="getEnter($event)" id="messageInput"></textarea>
-					<br>
-					<input type="submit" id="lightBtn" class="uiButton btn" value="Send Message"/>
-				</div>
-			</form>
-			<form class="visible-xs" action="/users/logout" method="get">
-				<br>
-				<button class="uiButton btn" ng-click="logout()">Logout</button>
-			</form>
-		</div>
-	</div>
-
+      <form ng-submit="cc.send(message)">
+        <div class="input-group" id="messageInput">
+          <textarea
+            required
+            rows="1"
+            class="form-control"
+            ng-model="cc.chat.message"
+            ng-keyup="cc.getEnter($event)"
+          ></textarea>
+          <span
+            type="submit"
+            ng-disabled="!cc.chat.message"
+            class="input-group-addon btn btn-primary"
+            ng-click="cc.send(message)"
+            >Send</span
+          >
+        </div>
+      </form>
+      <form class="visible-xs" action="/users/logout" method="get">
+        <button class="btn btn-default form-control" ng-click="logout()">
+          Logout
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,125 +1,129 @@
 body {
-	background-color:rgb(49,95,117);
+  background-color: rgb(70, 115, 170);
+  max-height: 100vh;
 }
 
-#main {
-	margin: 0;
-	min-height: 100vh;
-}
-
-h1 {
-	font-family: Impact;
-	font-size: 60px;
-}
-
-#login, #register {
-	background-color: white;
-	padding: 20px 60px 60px 60px;
-	border-radius: 10px;
-	margin-top: 5%;
-	box-shadow: 0 20px 50px black;
-	height: 70vh;
-}
-
-#headerIcon {
-	width: 35%;
-	height: 17vh;
-	margin-left: 33%;
+.btn {
+  font-weight: bold;
+  font-size: 1.5em !important;
+  height: 5vh !important;
 }
 
 .btn:focus {
-	outline: 0;
+  outline: 0;
 }
 
-.uiButton {
-	font-family:arial, helvetica, sans-serif;
-	width: 100%;
-	color: white;
-	background: rgb(0,48,69);
-	color:white;
-	font-weight: 600;
-	text-shadow: -1px 0 0 #000,
-				 0 -1px 0 #000,
-				 -1px 0 0 #000,
-				 0 1px 0 #000;
+input,
+.input-group,
+.input-group > input {
+  min-height: 4vh !important;
+  height: 4vh !important;
+  font-size: 1.2em !important;
 }
 
-#lightBtn {
-	text-shadow: none;
-	background: rgb(0,100,150);
+#main {
+  color: white;
+  margin: 0;
 }
 
-.uiButton:hover, #lightBtn:hover {
-	background: rgba(0,48,69, 0.7);
-	color: white;
+#title {
+  font-size: 7em;
+}
+
+h1 {
+  font-family: Impact;
+  font-size: 60px;
+}
+
+#login,
+#register {
+  color: black;
+  background-color: white;
+  padding: 20px 60px 60px 60px;
+  border-radius: 10px;
+  margin-top: 5%;
+  box-shadow: 0 16px 30px black;
+  height: 70vh;
+}
+
+#loginForm,
+#registerForm {
+  margin-top: 8vh;
 }
 
 #chatBody {
-	background-color: #DDD;
-	padding-bottom: 50px;
-	min-height: 100vh;
+  color: white;
+  padding-bottom: 50px;
 }
 
 #chatHeader {
-	color: black;
-	margin: 0;
-	padding: 20px;
-	width: 32%;
-	margin: 0 0 -40px 34%;
+  margin: 0;
+  padding: 20px;
+  width: 32%;
+  margin: 0 0 -40px 34%;
 }
 
-h3, label {
-	color: black;
-	font-family: "Arial Black", Impact, Arial;
+.chat-message {
+  color: black;
+}
+
+h3,
+label {
+  font-family: "Arial Black", Impact, Arial;
+}
+
+.btn-online-user {
+  height: 3vh !important;
+  font-size: 0.5em !important;
 }
 
 #online {
-	width: 100%;
-	height: 493px;
-	border: 1px solid #CCC;
-	overflow: auto;
-	background-color: rgba(255,255,255,0.85);
-	box-shadow: #222 2px 2px 8px;
+  color: black;
+  width: 100%;
+  height: 75vh;
+  border: 1px solid #ccc;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: #222 2px 2px 8px;
 }
 
 #onlineUser {
-	padding: 10px;
-	height: 50px;
-	font-weight: 700;
-	font-size: 20px;
-	border: 1px solid #AAA;
-	background-color: white;
+  padding: 10px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  border: 1px solid #aaa;
+  background-color: white;
 }
 
 .roomJoin {
-	float: right;
-	margin-top: -3px;
-	font-size: 1vw;
+  float: right;
+  margin-top: -3px;
+  font-size: 1vw;
 }
 
 #chat {
-	width: 100%;
-	height: 400px;
-	border: 1px solid #CCC;
-	overflow-y: auto;
-	overflow-x: hidden;
-	background-color: white;
-	box-shadow: #222 2px 2px 8px;
+  width: 100%;
+  height: 75vh;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: white;
+  box-shadow: #222 2px 2px 8px;
 }
 
 .msg {
-	border-bottom: 1px solid #CCC;
-	padding-bottom: 5px;
-	margin: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin: 5px;
 }
 
 #messageInput {
-	height: 50px;
-	box-shadow: #222 2px 2px 8px;
+  height: 50px;
+  box-shadow: #222 2px 2px 8px;
+  font-size: 1.2em;
 }
 
-#messageForm {
-	width: 100%;
-	min-height: 100px;
-	max-height: 200px;
+.btn-logout {
+  box-shadow: #222 2px 2px 8px;
 }

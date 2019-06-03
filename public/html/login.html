@@ -1,30 +1,75 @@
-<div class="container">
-	<div class="row">
-		<div id="login" class="col-md-6 col-md-offset-3">
-			<h1 class="text-center">MEANchat</h1>
-			<br>
-			<form id="loginForm">
-				<div class="input-group input-group-sm">
+<div id="login" class="container">
+  <div class="row form-group">
+	  <h1 class="text-center" id="title">MEANchat
+			<img
+			width="75"
+			height="75"
+			src="../assets/title_icon.png"
+		  />
+	  </h1>
+  </div>
+      <form id="loginForm">
+		<div class="row form-group">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="input-group">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-user"></span>
 					</span>
-					<input class="form-control" ng-model="user.username" type="text" placeholder="User Name..." name="username" autofocus required>
-				</div><br>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-lock"></span>
-					</span>
-					<input class="form-control" ng-model="user.password" type="password" placeholder="Password..." name="password" required>
-				</div><br>
-				<button ng-click="login(user)" id="lightBtn" class="btn uiButton" type="submit">Login</button>
-			</form>
-			<br>
-			<a ui-sref="register" class="btn uiButton">Register</a>
-			<h3 ng-show="error" class="error text-center">
-				Invalid user name or password... Try again.
-			</h3>
-			<br><br><br>
-			<img ng-hide="error" class="img-responsive" src="../assets/title_icon.png" id="headerIcon">
+					<input
+						class="form-control"
+						ng-model="lc.user.username"
+						type="text"
+						placeholder="User Name"
+						name="username"
+						autofocus
+						required
+					/>
+				</div>
+			</div>
 		</div>
+		<div class="row form-group">
+				<div class="col-md-8 col-md-offset-2">
+
+			<div class="input-group">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-lock"></span>
+			</span>
+			<input
+				class="form-control"
+				ng-model="lc.user.password"
+				type="password"
+				placeholder="Password"
+				name="password"
+				required
+			/>
+			</div>
+			</div>
+		</div>
+		<div class="row form-group">
+				<div class="col-md-8 col-md-offset-2">
+
+			<button
+			ng-click="lc.login(user)"
+			class="btn btn-primary form-control"
+			type="submit"
+			>
+			Login
+			</button>
+			</div>
+		</div>
+	</form>
+	<div class="row form-group">
+			<div class="col-md-8 col-md-offset-2">
+	  <button type="button" ui-sref="register" class="btn btn-default form-control">Register</button>
+	  </div>
 	</div>
+	<div class="row form-group">
+			<div class="col-md-8 col-md-offset-2">
+
+      <h3 ng-show="lc.error" class="text-danger text-center">
+        Invalid user name or password... Try again.
+	  </h3>
+	  </div>
+	</div>
+  </div>
 </div>
