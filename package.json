@@ -22,7 +22,7 @@
     "express-session": "^1.14.0",
     "express-validator": "^2.20.8",
     "lodash": "^4.17.11",
-    "mongodb": "^2.2.5",
+    "mongodb": "^3.6.1",
     "mongoose": "^4.5.7",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
